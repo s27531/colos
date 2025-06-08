@@ -39,6 +39,10 @@ namespace colos.Controllers
             {
                 return BadRequest(e.Message);
             }
+            catch (ConcertDoesntExistsException e)
+            {
+                return BadRequest(e.Message);
+            }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
