@@ -18,9 +18,9 @@ namespace colos.Controllers
                 var customer = await service.GetCustomer(customerId);
                 return Ok(customer);
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
-                return NotFound();   
+                return NotFound("Customer not found");   
             }
         }
 
@@ -31,21 +31,17 @@ namespace colos.Controllers
                 await service.AddCustomer(request);
                 return Created();
             }
-            catch (TicketCountExceededException e)
+            catch (TicketCountExceededException)
             {
-                return BadRequest(e.Message);
+                return BadRequest("Ticket count exceeded");
             }
             catch (CustomerAlreadyExistsException e)
             {
-                return BadRequest(e.Message);
+                return BadRequest("Customer already exists");
             }
             catch (ConcertDoesntExistsException e)
             {
-                return BadRequest(e.Message);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
+                return BadRequest("Concert doesn't exist");
             }
         }
         

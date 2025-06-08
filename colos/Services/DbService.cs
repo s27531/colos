@@ -110,7 +110,7 @@ public class DbService(DatabaseContext context) : IDbService
                 await transaction.CommitAsync();
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             await transaction.RollbackAsync();
             throw;
