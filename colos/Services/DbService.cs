@@ -64,7 +64,7 @@ public class DbService(DatabaseContext context) : IDbService
     
             var newCustomer = new Customer
             {
-                //CustomerId = request.Customer.Id, breaks the program
+                //CustomerId = request.Customer.Id, // breaks the program
                 FirstName = request.Customer.FirstName,
                 LastName = request.Customer.LastName,
                 PhoneNumber = request.Customer.PhoneNumber,
@@ -76,7 +76,7 @@ public class DbService(DatabaseContext context) : IDbService
             {
                 var newTicket = new Ticket
                 {
-                    SerialNumber = "[SERIAL NUMBER]",
+                    SerialNumber = "[SERIAL NUMBER GENERATOR]",
                     SeatNumber = p.SeatNumber,
                 };
                 await context.Tickets.AddAsync(newTicket);
@@ -107,8 +107,8 @@ public class DbService(DatabaseContext context) : IDbService
                 };
                 await context.PurchasedTickets.AddAsync(pt);
                 await context.SaveChangesAsync();
-                await transaction.CommitAsync();
             }
+            await transaction.CommitAsync();
         }
         catch (Exception)
         {
